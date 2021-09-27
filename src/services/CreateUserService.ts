@@ -1,27 +1,25 @@
 import { getCustomRepository } from "typeorm"
 import { UsersRepositories } from "../repositories/UsersRepositories"
+import { existClass, notExistString } from "../utilities/existOrNot"
 
 interface IUserRepository {
   name: string
   email: string
+  password: string
   admin?: boolean
 }
 
 class CreateUserService {
-  async execute({ name, email, admin }: IUserRepository) {
+  async execute({ name, email, password, admin }: IUserRepository) {
     const UsersRepository = getCustomRepository(UsersRepositories)
 
-    if (!email) {
-      throw new Error("Email incorrect!")
-    }
+    notExistString(email, "Email incorrect!")
 
     const userExist = await UsersRepository.findOne({ email })
 
-    if (userExist) {
-      throw new Error("User alredy exist!")
-    }
+    existClass(userExist, "User alrady exist!")
 
-    const user = UsersRepository.create({ name, email, admin })
+    const user = UsersRepository.create({ name, email, password, admin })
     await UsersRepository.save(user)
 
     return user
