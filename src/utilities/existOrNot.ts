@@ -21,3 +21,15 @@ export function existClass(value: object, msg: string) {
     throw new Error(msg)
   }
 }
+
+export function notExistBoolean(value: boolean, msg: string) {
+  if (!value) {
+    throw new Error(msg)
+  }
+}
+
+export function existBoolean(value: boolean, msg: string) {
+  if (value) {
+    throw new Error(msg)
+  }
+}
