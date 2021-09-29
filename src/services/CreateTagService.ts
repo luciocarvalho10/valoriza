@@ -4,17 +4,17 @@ import { existClass, notExistString } from "../utilities/existOrNot"
 
 class CreateTagService {
   async execute(name: string) {
-    const tagsRepositories = getCustomRepository(TagsRepositories)
+    const tagsRepository = getCustomRepository(TagsRepositories)
 
     notExistString(name, "Incorrect name!")
 
-    const tagAlreadyExist = await tagsRepositories.findOne({ name })
+    const tagAlreadyExist = await tagsRepository.findOne({ name })
 
     existClass(tagAlreadyExist, "Name already exist!")
 
-    const tag = tagsRepositories.create({ name })
+    const tag = tagsRepository.create({ name })
 
-    await tagsRepositories.save(tag)
+    await tagsRepository.save(tag)
 
     return tag
   }

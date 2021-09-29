@@ -12,23 +12,23 @@ interface IUserRepository {
 
 class CreateUserService {
   async execute({ name, email, password, admin }: IUserRepository) {
-    const UsersRepository = getCustomRepository(UsersRepositories)
+    const usersRepository = getCustomRepository(UsersRepositories)
 
     notExistString(email, "Email incorrect!")
 
-    const userExist = await UsersRepository.findOne({ email })
+    const userExist = await usersRepository.findOne({ email })
 
     existClass(userExist, "User alrady exist!")
 
     const passwordHash = await hash(password, 8)
 
-    const user = UsersRepository.create({
+    const user = usersRepository.create({
       name,
       email,
       password: passwordHash,
       admin,
     })
-    await UsersRepository.save(user)
+    await usersRepository.save(user)
 
     return user
   }
