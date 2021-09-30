@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm"
 import { ComplimentsRepositories } from "../repositories/ComplimentsRepositories"
 import { UsersRepositories } from "../repositories/UsersRepositories"
-import { notExistBoolean, notExistClass } from "../utilities/existOrNot"
+import { existBoolean, notExistClass } from "../utilities/existOrNot"
 
 interface IComplimentRequest {
   tag_id: string
@@ -20,7 +20,7 @@ class CreateComplimentService {
     const complimentsRepositories = getCustomRepository(ComplimentsRepositories)
     const usersRepositories = getCustomRepository(UsersRepositories)
 
-    notExistBoolean(user_sender === user_receiver, "Incorrect receiver")
+    existBoolean(user_sender === user_receiver, "Incorrect receiver")
 
     const receiverExist = await usersRepositories.findOne(user_receiver)
 

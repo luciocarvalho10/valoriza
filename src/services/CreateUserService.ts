@@ -11,7 +11,7 @@ interface IUserRepository {
 }
 
 class CreateUserService {
-  async execute({ name, email, password, admin }: IUserRepository) {
+  async execute({ name, email, password, admin = false }: IUserRepository) {
     const usersRepository = getCustomRepository(UsersRepositories)
 
     notExistString(email, "Email incorrect!")

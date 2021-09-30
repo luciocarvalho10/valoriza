@@ -3,7 +3,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryColumn,
 } from "typeorm"
@@ -17,22 +16,22 @@ class Compliment {
   readonly id: string
 
   @Column()
-  userSender: string
-  @JoinColumn({ name: "userSender" })
+  user_sender: string
+  @JoinColumn({ name: "user_sender" })
   @ManyToOne(() => User)
-  user_sender: User
+  userSender: User
 
   @Column()
-  userReceiver: string
-  @JoinColumn({ name: "userReceiver" })
+  user_receiver: string
+  @JoinColumn({ name: "user_receiver" })
   @ManyToOne(() => User)
-  user_receiver: User
+  userReceiver: User
 
   @Column()
-  tagId: string
-  @JoinColumn({ name: "tagId" })
+  tag_id: string
+  @JoinColumn({ name: "tag_id" })
   @ManyToOne(() => Tag)
-  tag_id: Tag
+  tagId: Tag
 
   @Column()
   message: string
